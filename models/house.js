@@ -10,7 +10,6 @@ let houseSchema = new Schema({
     houseMember : [{type: Schema.Types.ObjectId, ref : 'user'}],
     deviceList : [{type:Schema.Types.ObjectId, ref : 'device'}],
     houseAddress : {type:String}
-
 });
 module.exports = mongoose.model('house', houseSchema);
 

@@ -59,6 +59,7 @@ function updateWeatherDB() {
                         lat: weatherDatas[i].lat,
                         lon: weatherDatas[i].lon,
                         appKey: appKey,
+                        timezone : 'local',
                         version: 1
                     }
                 })
@@ -75,7 +76,6 @@ function updateWeatherDB() {
                                 console.log('update for ' + weatherDatas[i].city + ' finished');
                             }
                         });
-
                     })
                     .catch((err) => {
                         if (err) {
@@ -87,10 +87,7 @@ function updateWeatherDB() {
         .catch((err) => {
             console.log(err);
         });
-
-
 }
-
 
 function DEBUG() {
     weatherDB.remove({}, (err, result) => {
@@ -104,7 +101,7 @@ function DEBUG() {
 
 }
 
-router.post('/getCurrentWeaterInfo', (req, res) => {
+router.post('/getWeatherInfo', (req, res) => {
     //메인 화면에서 날씨 가져오기
     console.log('getCurrentWeaterInfo');
     let promise1 = new Promise((resolve, reject) => {
@@ -115,7 +112,7 @@ router.post('/getCurrentWeaterInfo', (req, res) => {
                 res.status(403).end();
             }
             if (result.length === 0) {
-                console.log('weather data for ' + req.body.city + 'not found');
+                console.log('weather data for ' + req.body.city + ' not found');
                 //현재 도시 날씨 가져와서 저장
                 reject(req.body);//새로 날씨 가져와서 저장
             } else {
@@ -146,7 +143,7 @@ router.post('/getCurrentWeaterInfo', (req, res) => {
                         let weatherData = response.data.gweather.forecastDays[0];
                         //console.log(response.data.gweather.forecastDays[0]);
                         let newWeatherData = weatherDB({
-                            city: weatherData.location.city,
+                            city: values.city,
                             data: weatherData.forecast,
                             lat: values.lat,
                             lon: values.lon
@@ -169,7 +166,6 @@ router.post('/getCurrentWeaterInfo', (req, res) => {
             }
         )
 });
-
 
 let cronjob2 = new cron.CronJob('00 00 * * * *', () => {
         //todo 1분에 한번씩 업데이트 중인데 1시간에 한번씩 업데이트하도록 변경

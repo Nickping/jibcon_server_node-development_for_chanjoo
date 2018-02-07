@@ -3,6 +3,7 @@ let router = express.Router();
 let House = require('../models/house');
 let User = require('../models/user');
 let DeviceItem = require('../models/DeviceItem');
+
 router.post('/addHouse', (req, res) => {
 
     let newHouse;

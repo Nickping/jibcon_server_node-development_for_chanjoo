@@ -307,7 +307,7 @@ function timeController() {
         //현재 시간의 time_id 찾기
         //time_id를 가진 모든 태스크 찾기
         //현재 태스크의 태스크 타입으로 비교하여 해당하는 액션 수행
-
+        //21_15 timeStamp
         timeDB.findOne({time: timeStamp}, (err, time_id) => {
             if (err)
                 throw err;
@@ -316,6 +316,7 @@ function timeController() {
             }
             else {
                 resolve(time_id._id);
+                //21_25 객체가 있다->2354sdfasdf93
             }
         });
 
@@ -368,6 +369,7 @@ let cronjob1 = new cron.CronJob('00 * * * * *', () => {
     true,
     'Asia/Seoul'
 );
+
 
 
 cronjob1.start();

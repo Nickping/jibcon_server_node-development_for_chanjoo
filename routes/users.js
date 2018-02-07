@@ -35,7 +35,7 @@ function facebookLogin(access_token, res) {
     //console.log('path : ', path);
     https.get(path, (response) => {
         response.on('data', (d) => {
-            let json = JSON.parse(d);
+            let json = JSON.parse(d);//facebook id
             User.findOne({social_id: json.id}, (err, user) => {
                 let foundUser;
                 if (err) res.status(400).end();

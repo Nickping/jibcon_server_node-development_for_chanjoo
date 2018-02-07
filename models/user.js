@@ -3,7 +3,6 @@ mongoose.Promise = Promise;
 var Schema = mongoose.Schema;
 let House = require('../models/house');
 var userSchema = new Schema({
-    //token이 유저의 PK값
     email: {type: String, requried: true},
     first_name: {type: String, default: ''},
     last_name: {type: String, default: ''},

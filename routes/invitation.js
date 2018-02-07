@@ -24,8 +24,6 @@ router.post('/makeInvitation', (req, res) => {
 });
 
 router.get('/findInvitation/:invitation_Id',(req,res)=>{
-
-
     Invitation.findOne({_id:req.params.invitation_Id},(err,invitation)=>{
         if(err)
             throw err;
