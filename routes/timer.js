@@ -42,7 +42,7 @@ function sendMessage(task) {
     let message = JSON.parse(JSON.stringify(pushMessage));
 
     let promise1 = new Promise((resolve, reject) => {
-        User.findOne({user_id: task.userId}, (err, user) => {
+        User.findOne({_id: task.userId}, (err, user) => {
             if (err)
                 throw err;
             if (user === undefined) {
@@ -72,7 +72,7 @@ function sendWeather(task) {
     let message = JSON.parse(JSON.stringify(pushMessage));
 
     let promise1 = new Promise((resolve, reject) => {
-        User.findOne({user_id: task.userId}, (err, user) => {
+        User.findOne({_id: task.userId}, (err, user) => {
             if (err)
                 throw err;
             if (user === undefined) {
